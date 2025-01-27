@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}こんにちは{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>こんにちは</h1>
+        <h1> クラス日誌のシステムへようこそ, {{ current_user.username }}さん！</h1>
+        <nav>
+            <a href="{{ url_for('add_class_log') }}">授業の記録を追加</a>
+            <a href="{{ url_for('view_class_logs') }}">授業の記録を見る</a>
+            <a href="{{ url_for('add_notes') }}">放課後と所感を追加</a>
+            <a href="{{ url_for('view_notes') }}">放課後と所感記録を見る</a>
+            <a href="{{ url_for('view_students') }}">学生管理</a>
+        </nav>
+    </div>
+{% endblock %}

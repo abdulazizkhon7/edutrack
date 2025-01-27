@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+    <title>学生情報の編集</title>
+</head>
+<body>
+    <a href="{{ url_for('view_students') }}" class="back-to-home">← 学生管理に戻る</a>
+    <div class="note">
+    <h1 class="a-----1">学生情報の編集</h1>
+    <form method="POST">
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" value="{{ student.username }}" required><br><br>
+
+        <label for="password">パスワード（変更する場合は入力してください）:</label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <button type="submit">保存</button>
+    </form>
+    </div>
+</body>
+</html>

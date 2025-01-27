@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>学生を追加</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <a href="{{ url_for('view_students') }}" class="back-to-home">← 学生管理に戻る</a>
+    <div class="note">
+    <h1 class="a-----1">新しい学生を追加</h1>
+    <form method="POST">
+        <label for="username">ユーザー名:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">パスワード:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">追加</button>
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授業記録</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back-to-home">← ホームに戻る</a>
+    <h1 class="a-----2">授業記録</h1>
+    <form method="GET" action="{{ url_for('view_class_logs') }}">
+        <label for="search_date">日付で検索:</label>
+        <input type="date" id="search_date" name="search_date">
+        <button type="submit">検索</button>
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>時限</th>
+                <th>科目</th>
+                <th>教師</th>
+                <th>内容</th>
+                <th>遲刻•欠席</th>
+                <th>学生</th>
+                <th>操作</th>
+                <th>削除する</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in logs %}
+            <tr>
+                <td>{{ entry['log'].date }}</td>
+                <td>{{ entry['log'].period }}</td>
+                <td>{{ entry['log'].subject }}</td>
+                <td>{{ entry['log'].teacher }}</td>
+                <td>{{ entry['log'].content }}</td>
+                <td>{{ entry['attendance'] }}</td>
+                <td>{{ entry['username'] }}</td>
+                <td>
+                    <a href="{{ url_for('edit_class_log', log_id=entry['log'].id) }}" class="j">編集</a>
+                </td>
+                <td>
+                    <form action="{{ url_for('delete_class_log', log_id=entry.log.id) }}" method="POST" onsubmit="return confirm('この記録を削除しますか?');">
+                        {% if current_user.id == entry.log.user_id or current_user.role == "admin" %}
+                        <button type="submit" class="j">消す</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授業記録の編集</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <a href="{{ url_for('view_class_logs') }}" class="back-to-home">← 授業</a>
+    <div class="note">
+        <h1 class="a-----1">授業記録の編集</h1>
+        <form method="POST">
+            <label for="date">日付:</label>
+            <input type="date" id="date" name="date" value="{{ log.date }}" required><br><br>
+            <label for="period">時間:</label>
+            <select id="period" name="period" required>
+                <option value="1-時限" {% if log.period == "1-時限" %}selected{% endif %}>1時間目</option>
+                <option value="2-時限" {% if log.period == "2-時限" %}selected{% endif %}>2時間目</option>
+                <option value="3-時限" {% if log.period == "3-時限" %}selected{% endif %}>3時間目</option>
+                <option value="4-時限" {% if log.period == "4-時限" %}selected{% endif %}>4時間目</option>
+                <option value="5-時限" {% if log.period == "5-時限" %}selected{% endif %}>5時間目</option>
+                <option value="6-時限" {% if log.period == "6-時限" %}selected{% endif %}>6時間目</option>
+            </select><br><br>
+        
+            <label for="subject">科目名:</label>
+            <input type="text" id="subject" name="subject" value="{{ log.subject }}" required><br><br>
+        
+            <label for="teacher">教師:</label>
+            <input type="text" id="teacher" name="teacher" value="{{ log.teacher }}" required><br><br>
+        
+            <label for="content">授業内容:</label>
+            <textarea id="content" name="content" required>{{ log.content }}</textarea><br><br>
+        
+            <label for="attendance">遲刻•欠席:</label>
+            <input type="text" id="attendance" name="attendance" value="{{ log.attendance }}"><br><br>
+        
+            <button type="submit">保存</button>
+        </form>
+    </div>
+</body>
+</html>

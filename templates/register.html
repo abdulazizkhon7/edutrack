@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <div class="container menu">
+        <div class="baba">
+            <img src="https://forum.ac.jp/forum/wp-content/themes/amore_tcd028/images2/img_logo01.png" alt="EduTrack">
+        </div>
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="ユーザー名" required>
+            <input type="password" id="password" name="password" placeholder="パスワード (8文字以上)" required>
+            <select name="role" required>
+                <option value="student">学生</option>
+                <option value="admin">先生</option>
+            </select>
+            <button type="submit">登録</button>
+        </form>
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        <p>ログインするには、<a href="{{ url_for('login') }}">こちらをクリック</a>してください。</p>
+    </div>
+</body>
+</html>

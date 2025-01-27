@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授業記録を追加</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back-to-home">← ホームに戻る</a>
+    <div class="note">
+        <h1 class="a-----1">授業記録を追加</h1>
+        <form method="POST" action="{{ url_for('add_class_log') }}">
+            <label for="date">日付:</label>
+            <input type="date" id="date" name="date" required><br><br>
+            
+            <label for="period">時限:</label>
+            <select id="period" name="period" required>
+                <option value="1時限">1時限</option>
+                <option value="2時限">2時限</option>
+                <option value="3時限">3時限</option>
+                <option value="4時限">4時限</option>
+                <option value="5時限">5時限</option>
+                <option value="6時限">6時限</option>
+            </select>
+
+            <label for="subject">科目名:</label>
+            <input type="text" id="subject" name="subject" required><br><br>
+
+            <label for="teacher">教師名:</label>
+            <input type="text" id="teacher" name="teacher" required><br><br>
+
+            <label for="content">授業内容:</label>
+            <textarea id="content" name="content" required></textarea><br><br>
+
+            <label for="attendance">遲刻•欠席:</label>
+            <input type="text" id="attendance" name="attendance" placeholder="出席情報を入力してください"><br><br>
+
+            <button type="submit">保存</button>
+        </form>
+    </div>
+</body>
+</html>

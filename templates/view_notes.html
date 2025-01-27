@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>追加されたメモを見る</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="back-to-home">← ホームに戻る</a>
+    <h1 class="a-----2">追加されたメモを見る</h1>
+    <!-- 検索フォーム -->
+    <form method="GET" action="{{ url_for('view_notes') }}">
+        <label for="search_date">日付を選択:</label>
+        <input type="date" id="search_date" name="search_date" value="{{ request.args.get('search_date', '') }}">
+        <button type="submit">検索</button>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>放課後</th>
+                <th>所感</th>
+                <th>学生</th>
+                <th>操作</th>
+                <th>削除する</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in logs %}
+            <tr>
+                <td>{{ entry.log.date }}</td>
+                <td>{{ entry.log.after_class_notes }}</td>
+                <td>{{ entry.log.impressions }}</td>
+                <td>{{ entry['username'] }}</td>
+                <td>
+                    {% if current_user.role == "admin" or current_user.id == entry.log.user_id %}
+                    <a  href="{{ url_for('edit_note', log_id=entry.log.id) }}" class="j">  編集  </a>
+                    {% endif %}
+                </td>        
+                <td>
+                    <form action="{{ url_for('delete_note', log_id=entry.log.id) }}" method="POST" onsubmit="return confirm('この記録を削除しますか?');">
+                        {% if current_user.id == entry.log.user_id or current_user.role == "admin" %}
+                        <button type="submit" class="j">消す</button>
+                        {% endif %}
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">メモが見つかりませんでした。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

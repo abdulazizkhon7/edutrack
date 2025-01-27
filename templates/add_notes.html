@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>放課後と所感</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body> 
+    <a href="{{ url_for('dashboard') }}" class="back-to-home">← ホームに戻る</a>
+    <div class="note">
+    <h1 class="a-----1">放課後と所感</h1>
+    <form method="POST" action="{{ url_for('add_notes') }}">
+        <label for="date">日付:</label>
+        <input type="date" id="date" name="date" required><br>
+
+        <label for="after_class_notes">授業後:</label>
+        <textarea id="after_class_notes" name="after_class_notes" required></textarea><br>
+
+        <label for="impressions">感想:</label>
+        <textarea id="impressions" name="impressions" required></textarea><br>
+
+        <button type="submit">保存</button>
+    </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記録の編集</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=2">
+</head>
+<body>
+    <a href="{{ url_for('view_notes') }}" class="back-to-home">← 放課後と所感記録を見る</a>
+    <div class="note">
+        <h1 class="a-----1">記録の編集</h1>
+        <form method="POST" action="{{ url_for('edit_note', log_id=log.id) }}">
+            <label for="date">日付:</label>
+            <input type="date" id="date" name="date" value="{{ log.date }}" required><br><br>
+            <label for="after_class_notes">放課後:</label>
+            <textarea id="after_class_notes" name="after_class_notes" required>{{ log.after_class_notes }}</textarea><br><br>
+            <label for="impressions">感想:</label>
+            <textarea id="impressions" name="impressions" required>{{ log.impressions }}</textarea><br><br>
+            <button type="submit">保存</button>
+    </form>
+    </div>
+</body>
+</html>
